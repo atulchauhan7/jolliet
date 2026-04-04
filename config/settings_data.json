@@ -132,22 +132,25 @@
           "category_NFpbcV": {
             "type": "category",
             "settings": {
-              "label": "The Muse",
-              "link": "shopify://collections/the-muse"
+              "image": "shopify://shop_images/PastelPeachBotanicaKurti_5.jpg",
+              "label": "Co-ord sets",
+              "link": "shopify://collections/noore-botanica"
             }
           },
           "category_A8zzmY": {
             "type": "category",
             "settings": {
-              "label": "The Soul",
-              "link": "shopify://products/ethic-kurti"
+              "image": "shopify://shop_images/MustardYellowFloralPrintedKurtaSet_2.jpg",
+              "label": "Co-ord sets",
+              "link": "shopify://collections/co-ord-sets"
             }
           },
           "category_CNrpzp": {
             "type": "category",
             "settings": {
-              "label": "The aura",
-              "link": "shopify://collections/the-aura"
+              "image": "shopify://shop_images/ObsidianShadowAll-OverEmbroideredChikankariKurti_5.jpg",
+              "label": "All season wear",
+              "link": "shopify://collections/frontpage"
             }
           }
         },
