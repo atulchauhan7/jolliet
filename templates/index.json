@@ -142,13 +142,15 @@
         "b1": {
           "type": "banner",
           "settings": {
+            "image": "shopify://shop_images/Pink_WhiteFloralBlock-PrintKurti_5.jpg",
             "heading": "New Arrivals",
             "button_label": "Shop Now",
-            "link": "shopify://collections/new-arrival"
+            "link": "shopify://collections/best-sellers"
           }
         },
         "b2": {
           "type": "banner",
+          "disabled": true,
           "settings": {
             "heading": "kurti sets",
             "button_label": "Shop Now",
@@ -201,6 +203,7 @@
     "image-text": {
       "type": "image-with-text",
       "settings": {
+        "image": "shopify://shop_images/Logo_page-0001.jpg",
         "subtitle": "Our Story",
         "heading": "Crafted with Love",
         "text": "<p>Every kurti in our collection is thoughtfully designed, blending traditional Indian craftsmanship with contemporary style. From handpicked fabrics to intricate detailing, we create ethnic wear that celebrates the grace of every woman.</p>",
