@@ -9,8 +9,8 @@
  */
 {
   "current": {
-    "accent_color": "#F4a610",
-    "accent_color_dark": "#F4a610",
+    "accent_color": "#e12d2d",
+    "accent_color_dark": "#e12d2d",
     "text_color": "#1a1a1a",
     "text_muted_color": "#888888",
     "heading_color": "#1a1a1a",
@@ -45,7 +45,7 @@
     "product_show_rating": true,
     "product_delivery_min_days": 5,
     "product_delivery_max_days": 7,
-    "product_tax_note": "incl. of all taxes  <br> <p style=\"color:  #F4A610; font-weight: 15px\"> 🎁 Free gift on prepaid orders  </p>",
+    "product_tax_note": "incl. of all taxes  <br> <p style=\"color:  #e12d2d; font-weight: 15px\"> 🎁 Free gift on prepaid orders  </p>",
     "product_trust_1": "Free Shipping ₹999+",
     "product_trust_2": "10-Day Returns",
     "product_trust_3": "Secure Checkout",
