@@ -6,8 +6,8 @@
   GoKwik is hidden via settings.goEnable when this is active.
 {% endcomment %}
 {% if settings.razorpay_enabled %}
-<form action="{{ routes.cart_url }}" method="post" novalidate class="razorpay-checkout-wrap">
-  <button type="submit" name="checkout" class="btn btn--primary btn--full">
+<form action="/checkout" method="post" novalidate class="razorpay-checkout-wrap">
+  <button type="submit" name="checkout" class="btn btn--primary btn--full" id="razorpay-magic-btn">
     <span class="btn-text">
       <span>{{ settings.razorpay_button_text | default: 'Checkout' }}</span>
     </span>
