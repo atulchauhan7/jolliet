@@ -310,6 +310,13 @@
       },
       {
         "type": "text",
+        "id": "razorpay_key_id",
+        "label": "Razorpay Key ID",
+        "placeholder": "rzp_live_XXXXXXXXXXXXXXXX",
+        "info": "Find this in Razorpay Dashboard \u2192 Settings \u2192 API Keys. Paste the Key ID (not the secret)."
+      },
+      {
+        "type": "text",
         "id": "razorpay_button_text",
         "label": "Button Text",
         "default": "Checkout"

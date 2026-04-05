@@ -11,6 +11,14 @@
 {% render 'gokwik' %}
 <!-- Gokwik theme code End -->
 
+{% if settings.razorpay_enabled and settings.razorpay_key_id != blank %}
+<!-- Razorpay Magic Checkout: key meta + window var read by Razorpay's injected app script -->
+<meta name="razorpay-key" content="{{ settings.razorpay_key_id }}">
+<script>window.rzp_key='{{ settings.razorpay_key_id }}';window.razorpayEnabled=true;</script>
+{% else %}
+<script>window.razorpayEnabled={{ settings.razorpay_enabled | json }};</script>
+{% endif %}
+
 <!-- Preconnect to critical origins -->
 <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
@@ -136,7 +144,6 @@ h1{font-size:clamp(2rem,5vw,3.8rem);font-weight:400;letter-spacing:0.04em}
 
 <script>
 document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-window.razorpayEnabled = {{ settings.razorpay_enabled | json }};
 window.theme = {
 moneyFormat: {{ shop.money_format | json }},
 currency: {{ cart.currency.iso_code | json }},

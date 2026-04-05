@@ -29,6 +29,7 @@
     "hideFlow": false,
     "goEnable": false,
     "razorpay_enabled": true,
+    "razorpay_key_id": "rzp_live_SZoa5cZOITCeiL",
     "priClr": "#000000",
     "secClr": "#ffffff",
     "main-titile": "Checkout",
