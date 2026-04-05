@@ -28,8 +28,6 @@
     "envType": "production",
     "hideFlow": false,
     "goEnable": false,
-    "razorpay_enabled": true,
-    "razorpay_key_id": "rzp_live_SZoa5cZOITCeiL",
     "priClr": "#000000",
     "secClr": "#ffffff",
     "main-titile": "Checkout",
@@ -37,6 +35,8 @@
     "btnBClr": "#000000",
     "btnTextClr": "#ffffff",
     "buyNowText": "Buy It Now",
+    "razorpay_enabled": true,
+    "razorpay_key_id": "rzp_live_SZoa5cZOITCeiL",
     "enable_animations": true,
     "enable_custom_cursor": false,
     "enable_newsletter_popup": false,
@@ -169,7 +169,14 @@
         }
       }
     },
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "3557650678667880288": {
+        "type": "shopify://apps/razorpay-cod-magic-checkout/blocks/magicx-script/c13c688d-5c45-4054-b95f-1edd63faa705",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "BlueMnky": {
