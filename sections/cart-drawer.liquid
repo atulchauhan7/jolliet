@@ -68,6 +68,7 @@
 <span>Subtotal</span>
 <span class="cart-drawer__subtotal-price">{{ cart.total_price | money }}</span>
 </div>
+  {% render 'razorpay-checkout' %}
   {% render 'gokwik-checkout' %}
   <form action="{{ routes.cart_url }}" method="post" novalidate class="cart-drawer__checkout-form shopifycheckoutbtn" style="display:none">
     <button type="submit" name="checkout" class="btn btn--primary btn--full">Checkout</button>

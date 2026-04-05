@@ -1,0 +1,16 @@
+{% comment %}
+  Razorpay Magic Checkout button snippet.
+  Rendered in cart-drawer and cart page when razorpay_enabled is true.
+  Uses a standard Shopify checkout form — Razorpay's app JS intercepts the
+  /checkout navigation automatically. No custom JS API required.
+  GoKwik is hidden via settings.goEnable when this is active.
+{% endcomment %}
+{% if settings.razorpay_enabled %}
+<form action="{{ routes.cart_url }}" method="post" novalidate class="razorpay-checkout-wrap">
+  <button type="submit" name="checkout" class="btn btn--primary btn--full">
+    <span class="btn-text">
+      <span>{{ settings.razorpay_button_text | default: 'Checkout' }}</span>
+    </span>
+  </button>
+</form>
+{% endif %}

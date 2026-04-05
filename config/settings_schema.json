@@ -299,6 +299,24 @@
     ]
   },
   {
+    "name": "Razorpay",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "razorpay_enabled",
+        "label": "Enable Razorpay Magic Checkout",
+        "default": false,
+        "info": "Hides GoKwik and shows the Razorpay checkout button. Razorpay's installed app handles the checkout flow automatically."
+      },
+      {
+        "type": "text",
+        "id": "razorpay_button_text",
+        "label": "Button Text",
+        "default": "Checkout"
+      }
+    ]
+  },
+  {
     "name": "Animations & Effects",
     "settings": [
       {

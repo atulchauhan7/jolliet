@@ -136,6 +136,7 @@ h1{font-size:clamp(2rem,5vw,3.8rem);font-weight:400;letter-spacing:0.04em}
 
 <script>
 document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+window.razorpayEnabled = {{ settings.razorpay_enabled | json }};
 window.theme = {
 moneyFormat: {{ shop.money_format | json }},
 currency: {{ cart.currency.iso_code | json }},
