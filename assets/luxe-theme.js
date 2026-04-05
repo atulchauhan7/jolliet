@@ -230,9 +230,9 @@ return false;
 }
 
 function triggerShopflowCheckout(source,trigger){
-/* Priority: Razorpay (app intercepts /checkout) → GoKwik → native */
+/* Priority: Razorpay (intercepts window.location to /checkout) → GoKwik → native */
 if(shouldUseRazorpayCheckout()){
-window.location.href=resolveCheckoutUrl();
+window.location.href='/checkout';
 return;
 }
 triggerGoKwikOrNative(trigger);
@@ -384,7 +384,7 @@ h+='<div class="cart-drawer__footer"><div class="cart-drawer__subtotal"><span>Su
 h+='<span class="cart-drawer__subtotal-price">'+money(cart.total_price)+'</span></div>';
 /* Razorpay Magic Checkout button (shown when enabled) */
 if(window.razorpayEnabled){
-h+='<form action="/checkout" method="post" novalidate class="razorpay-checkout-wrap"><button type="submit" name="checkout" id="razorpay-magic-btn" class="btn btn--primary btn--full"><span class="btn-text"><span>Checkout</span></span></button></form>';
+h+='<div class="razorpay-checkout-wrap"><button type="button" name="checkout" id="razorpay-magic-btn" class="btn btn--primary btn--full" onclick="window.location.href=\'/checkout\'"><span class="btn-text"><span>Checkout</span></span></button></div>';
 }else{
 h+='<div class="gokwik-checkout"><button type="button" class="btn btn--primary btn--full disabled" disabled onclick="onCheckoutClick(this)"><span class="btn-text"><span>Checkout</span></span></button></div>';
 }
