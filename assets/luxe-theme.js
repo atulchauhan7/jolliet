@@ -1370,46 +1370,40 @@ initSizeSheet();
 
 /* === SIZE CHART TABS + SELECTED SIZE HIGHLIGHT === */
 function initSizeChartTabs(){
-var tabs=$$('.size-chart-tab');
-var panels=$$('.size-chart-panel');
-if(!tabs.length)return;
-tabs.forEach(function(tab){
-tab.addEventListener('click',function(){
-var target=this.getAttribute('data-sc-tab');
-tabs.forEach(function(t){t.classList.remove('active')});
-panels.forEach(function(p){p.classList.remove('active')});
-this.classList.add('active');
-var panel=document.querySelector('[data-sc-panel="'+target+'"]');
+/* Delegate tab clicks on document — works regardless of init timing or DOM replacement */
+if(!initSizeChartTabs._delegated){
+initSizeChartTabs._delegated=true;
+document.addEventListener('click',function(e){
+var tab=e.target.closest('.size-chart-tab');
+if(!tab)return;
+var wrap=tab.closest('.size-chart-overlay')||document;
+wrap.querySelectorAll('.size-chart-tab').forEach(function(t){t.classList.remove('active')});
+wrap.querySelectorAll('.size-chart-panel').forEach(function(p){p.classList.remove('active')});
+tab.classList.add('active');
+var panel=wrap.querySelector('[data-sc-panel="'+tab.getAttribute('data-sc-tab')+'"]');
 if(panel)panel.classList.add('active');
 });
+/* Close overlay on backdrop click */
+document.addEventListener('click',function(e){
+var overlay=document.getElementById('size-chart-modal');
+if(overlay&&e.target===overlay)overlay.classList.remove('open');
 });
-/* Highlight selected size row in chart */
+}
+/* Highlight selected size row — re-runs on every call so new options are covered */
 function highlightSizeRow(){
 var table=document.querySelector('[data-size-chart]');
 if(!table)return;
 var rows=table.querySelectorAll('tbody tr[data-size]');
 var sizeOpt=document.querySelector('.product-option[data-option-name="Size"]')||document.querySelector('.product-option[data-option-name="Sizes"]');
 var selectedVal='';
-if(sizeOpt){
-var sel=sizeOpt.querySelector('.product-option__value.selected');
-if(sel)selectedVal=sel.getAttribute('data-value');
+if(sizeOpt){var sel=sizeOpt.querySelector('.product-option__value.selected');if(sel)selectedVal=sel.getAttribute('data-value');}
+rows.forEach(function(row){row.classList.toggle('size-active',row.getAttribute('data-size')===selectedVal);});
 }
-rows.forEach(function(row){
-row.classList.toggle('size-active',row.getAttribute('data-size')===selectedVal);
-});
+if(!initSizeChartTabs._highlightDelegated){
+initSizeChartTabs._highlightDelegated=true;
+document.addEventListener('click',function(e){if(e.target.closest('.product-option__value'))setTimeout(highlightSizeRow,50);});
 }
-/* Listen for size selection changes */
-$$('.product-option__value').forEach(function(v){
-v.addEventListener('click',function(){setTimeout(highlightSizeRow,50)});
-});
 highlightSizeRow();
-/* Close size chart on overlay click */
-var overlay=document.getElementById('size-chart-modal');
-if(overlay){
-overlay.addEventListener('click',function(e){
-if(e.target===overlay)overlay.classList.remove('open');
-});
-}
 }
 initSizeChartTabs();
 
