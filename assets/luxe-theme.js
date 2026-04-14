@@ -218,7 +218,6 @@ window.location.href=resolveCheckoutUrl();
 
 function shouldUseGoKwikCheckout(source,trigger){
 if(typeof onCheckoutClick!=='function')return false;
-if(source==='buy-now')return true;
 var el=trigger||null;
 if(el&&el.closest){
 if(el.closest('[data-buy-now],[data-add-to-cart],[data-product-form]'))return false;
@@ -238,6 +237,24 @@ return;
 triggerGoKwikOrNative(trigger);
 }
 
+function triggerBuyNowCheckout(trigger){
+if(shouldUseRazorpayCheckout()){
+/* #razorpay-magic-btn is only in the DOM after the cart drawer has been
+   rendered with items (cart-drawer.liquid wraps it in {% if cart.item_count > 0 %}).
+   When Buy Now fires from an empty-cart state the button doesn't exist yet.
+   refreshCart() re-renders the drawer HTML (injecting #razorpay-magic-btn),
+   then we click it — exactly how the cart checkout button is triggered. */
+refreshCart(function(){
+var rzBtn=document.getElementById('razorpay-magic-btn');
+if(rzBtn){rzBtn.click();return;}
+window.location.href=resolveCheckoutUrl();
+});
+return;
+}
+/* GoKwik or native */
+triggerGoKwikOrNative(trigger);
+}
+
 function fallbackHandleFloCheckoutBtn(trigger){
 return triggerShopflowCheckout('cart',trigger||null);
 }
@@ -247,6 +264,10 @@ var btn=trigger||document.activeElement||null;
 var productForm=btn&&btn.closest?btn.closest('[data-product-form]'):null;
 if(!productForm)productForm=document.querySelector('[data-product-form]');
 if(!productForm)return;
+if(productForm._isSizeSelected&&!productForm._isSizeSelected()){
+if(productForm._openSizeSheet)productForm._openSizeSheet('buy');
+return;
+}
 var variantInput=productForm.querySelector('input[name="id"]');
 var qtyInput=productForm.querySelector('input[name="quantity"]');
 if(!variantInput)return;
@@ -255,7 +276,7 @@ window.__buyNowInProgress=true;
 setBuyNowState('loading');
 fetch(window.theme.routes.cart_add_url+'.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:parseInt(variantInput.value,10),quantity:parseInt(qtyInput?qtyInput.value:1,10)||1}]})}).then(function(r){if(!r.ok)throw new Error('Add failed');return r.json()}).then(function(){
 setBuyNowState('redirecting');
-triggerShopflowCheckout('buy-now',btn);
+triggerBuyNowCheckout(btn);
 setTimeout(function(){setBuyNowState('reset');window.__buyNowInProgress=false},3000);
 }).catch(function(){setBuyNowState('error');window.__buyNowInProgress=false;setTimeout(function(){setBuyNowState('reset')},1500)});
 }
@@ -281,6 +302,10 @@ if(btn&&btn.classList&&btn.classList.contains('is-loading'))return;
 var productForm=btn&&btn.closest?btn.closest('[data-product-form]'):null;
 if(!productForm)productForm=document.querySelector('[data-product-form]');
 if(!productForm){window.location.href='/checkout';return;}
+if(productForm._isSizeSelected&&!productForm._isSizeSelected()){
+if(productForm._openSizeSheet)productForm._openSizeSheet('buy');
+return;
+}
 var variantInput=productForm.querySelector('input[name="id"]');
 var qtyInput=productForm.querySelector('input[name="quantity"]');
 if(!variantInput){window.location.href='/checkout';return;}
@@ -289,7 +314,7 @@ fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json','
 .then(function(r){if(!r.ok)throw new Error('add failed');return r.json();})
 .then(function(){
 setBuyNowState('redirecting');
-triggerShopflowCheckout('buy-now',btn);
+triggerBuyNowCheckout(btn);
 setTimeout(function(){setBuyNowState('reset');},3000);
 })
 .catch(function(){setBuyNowState('error');setTimeout(function(){setBuyNowState('reset');},1500);});
