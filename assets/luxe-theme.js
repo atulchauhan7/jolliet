@@ -1415,11 +1415,15 @@ if(!overlay)return;
 var obs=new MutationObserver(function(){
 if(overlay.classList.contains('open')){
 document.body.classList.add('overflow-hidden');
+overlay.setAttribute('aria-hidden','false');
 }else{
 document.body.classList.remove('overflow-hidden');
+overlay.setAttribute('aria-hidden','true');
 }
 });
 obs.observe(overlay,{attributes:true,attributeFilter:['class']});
+/* Sync aria-hidden with open state */
+overlay.setAttribute('aria-hidden',overlay.classList.contains('open')?'false':'true');
 /* Prevent touch scroll on overlay from propagating */
 overlay.addEventListener('touchmove',function(e){
 var body=overlay.querySelector('.size-chart-modal__body');
