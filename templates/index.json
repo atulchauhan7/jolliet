@@ -206,7 +206,7 @@
         "image": "shopify://shop_images/Logo_page-0001.jpg",
         "subtitle": "Our Story",
         "heading": "Crafted with Love",
-        "text": "<p>Every kurti in our collection is thoughtfully designed, blending traditional Indian craftsmanship with contemporary style. From handpicked fabrics to intricate detailing, we create ethnic wear that celebrates the grace of every woman.</p>",
+        "text": "<p><br/>Jolliet was created with a simple vision — to bring together the elegance of traditional Indian wear with the comfort and ease of modern fashion. We design kurtis that are not only stylish but truly wearable for everyday life, focusing on breathable fabrics, flattering fits, and timeless patterns. Every piece is thoughtfully crafted to make you feel confident, comfortable, and effortlessly beautiful, whether you’re at work, out with friends, or celebrating special moments. At Jolliet, it’s all about simple style, made for you.<br/><br/></p>",
         "button_label": "Learn More",
         "button_link": "",
         "reverse": false
@@ -222,17 +222,17 @@
             "title": "Returns and Refund Policy",
             "text": "Hassle-free returns within 10 days",
             "link_label": "Learn More",
-            "link_url": "shopify://pages/return-and-exchange-policy"
+            "link_url": "shopify://pages/shipping-and-return-policy"
           }
         },
         "usp2": {
           "type": "usp",
           "settings": {
             "icon": "shipping",
-            "title": "Free Shipping & COD",
-            "text": "Free shipping and cash on delivery available",
+            "title": "About Us",
+            "text": "Know more about your favorite brand",
             "link_label": "Learn More",
-            "link_url": "shopify://pages/shipping-policy"
+            "link_url": "shopify://pages/about-us"
           }
         },
         "usp3": {
