@@ -1,5 +1,5 @@
 {% comment %} Bottom Navigation Bar — Mobile {% endcomment %}
-{% unless settings.bottom_nav_enabled == false %}
+{% unless settings.bottom_nav_enabled == false or request.page_type == 'product' %}
 
 {% assign current_path = request.path %}
 
