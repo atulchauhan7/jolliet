@@ -565,26 +565,90 @@
     "name": "Bottom Navigation",
     "settings": [
       {
+        "type": "checkbox",
+        "id": "bottom_nav_enabled",
+        "label": "Enable bottom navigation",
+        "default": true
+      },
+      {
         "type": "header",
-        "content": "Bottom Nav Links"
+        "content": "Tab 1 — Home"
+      },
+      {
+        "type": "text",
+        "id": "bottom_nav_tab1_label",
+        "label": "Label",
+        "default": "Home"
       },
       {
         "type": "url",
-        "id": "bottom_nav_stores_url",
-        "label": "Stores URL",
-        "info": "Link for the Stores tab (e.g. /collections)"
+        "id": "bottom_nav_tab1_url",
+        "label": "URL",
+        "info": "Defaults to homepage"
+      },
+      {
+        "type": "header",
+        "content": "Tab 2 — Stores"
+      },
+      {
+        "type": "text",
+        "id": "bottom_nav_tab2_label",
+        "label": "Label",
+        "default": "Stores"
       },
       {
         "type": "url",
-        "id": "bottom_nav_categories_url",
-        "label": "Categories URL",
-        "info": "Link for the Categories tab (e.g. /collections/all)"
+        "id": "bottom_nav_tab2_url",
+        "label": "URL",
+        "info": "e.g. /collections"
+      },
+      {
+        "type": "header",
+        "content": "Tab 3 — Categories (centre)"
+      },
+      {
+        "type": "text",
+        "id": "bottom_nav_tab3_label",
+        "label": "Label",
+        "default": "Categories"
       },
       {
         "type": "url",
-        "id": "bottom_nav_offers_url",
-        "label": "Offers URL",
-        "info": "Link for the Offers tab (e.g. /collections/sale)"
+        "id": "bottom_nav_tab3_url",
+        "label": "URL",
+        "info": "e.g. /collections/all"
+      },
+      {
+        "type": "header",
+        "content": "Tab 4 — Offers"
+      },
+      {
+        "type": "text",
+        "id": "bottom_nav_tab4_label",
+        "label": "Label",
+        "default": "Offers"
+      },
+      {
+        "type": "url",
+        "id": "bottom_nav_tab4_url",
+        "label": "URL",
+        "info": "e.g. /collections/sale"
+      },
+      {
+        "type": "header",
+        "content": "Tab 5 — Account"
+      },
+      {
+        "type": "text",
+        "id": "bottom_nav_tab5_label",
+        "label": "Label",
+        "default": "Account"
+      },
+      {
+        "type": "url",
+        "id": "bottom_nav_tab5_url",
+        "label": "URL",
+        "info": "Defaults to customer account page"
       }
     ]
   }

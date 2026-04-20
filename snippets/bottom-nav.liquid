@@ -1,72 +1,91 @@
 {% comment %} Bottom Navigation Bar — Mobile {% endcomment %}
+{% unless settings.bottom_nav_enabled == false %}
 
 {% assign current_path = request.path %}
-{% assign home_url = routes.root_url %}
-{% assign stores_url = settings.bottom_nav_stores_url | default: routes.collections_url %}
-{% assign categories_url = settings.bottom_nav_categories_url | default: routes.collections_url %}
-{% assign offers_url = settings.bottom_nav_offers_url | default: '/collections/sale' %}
-{% assign account_url = routes.account_url %}
+
+{% assign tab1_label = settings.bottom_nav_tab1_label | default: 'Home' %}
+{% assign tab1_url   = settings.bottom_nav_tab1_url   | default: routes.root_url %}
+
+{% assign tab2_label = settings.bottom_nav_tab2_label | default: 'Stores' %}
+{% assign tab2_url   = settings.bottom_nav_tab2_url   | default: routes.collections_url %}
+
+{% assign tab3_label = settings.bottom_nav_tab3_label | default: 'Categories' %}
+{% assign tab3_url   = settings.bottom_nav_tab3_url   | default: routes.collections_url %}
+
+{% assign tab4_label = settings.bottom_nav_tab4_label | default: 'Offers' %}
+{% assign tab4_url   = settings.bottom_nav_tab4_url   | default: '/collections/sale' %}
+
+{% assign tab5_label = settings.bottom_nav_tab5_label | default: 'Account' %}
+{% assign tab5_url   = settings.bottom_nav_tab5_url   | default: routes.account_url %}
 
 <nav class="bottom-nav" aria-label="Bottom navigation">
-  <a href="{{ home_url }}"
+
+  {%- comment %} Tab 1 — Home {%- endcomment %}
+  <a href="{{ tab1_url }}"
      class="bottom-nav__item{% if current_path == '/' %} bottom-nav__item--active{% endif %}"
-     aria-label="Home">
+     aria-label="{{ tab1_label | escape }}">
     <span class="bottom-nav__icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H15v-5h-6v5H4a1 1 0 01-1-1V9.5z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </span>
-    <span class="bottom-nav__label">Home</span>
+    <span class="bottom-nav__label">{{ tab1_label }}</span>
   </a>
 
-  <a href="{{ stores_url }}"
-     class="bottom-nav__item{% if current_path contains 'collections' and current_path == routes.collections_url %} bottom-nav__item--active{% endif %}"
-     aria-label="Stores">
+  {%- comment %} Tab 2 — Stores {%- endcomment %}
+  <a href="{{ tab2_url }}"
+     class="bottom-nav__item{% if current_path == tab2_url %} bottom-nav__item--active{% endif %}"
+     aria-label="{{ tab2_label | escape }}">
     <span class="bottom-nav__icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M3 9h18M3 9l2-5h14l2 5M3 9v10a1 1 0 001 1h5v-5h6v5h5a1 1 0 001-1V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="1.8"/>
         <circle cx="15" cy="9" r="2" stroke="currentColor" stroke-width="1.8"/>
       </svg>
     </span>
-    <span class="bottom-nav__label">Stores</span>
+    <span class="bottom-nav__label">{{ tab2_label }}</span>
   </a>
 
-  <a href="{{ categories_url }}"
-     class="bottom-nav__item bottom-nav__item--center{% if current_path contains '/collections' and current_path != routes.root_url %} bottom-nav__item--active{% endif %}"
-     aria-label="Categories">
+  {%- comment %} Tab 3 — Categories (elevated centre tab) {%- endcomment %}
+  <a href="{{ tab3_url }}"
+     class="bottom-nav__item bottom-nav__item--center{% if current_path == tab3_url %} bottom-nav__item--active{% endif %}"
+     aria-label="{{ tab3_label | escape }}">
     <span class="bottom-nav__icon bottom-nav__icon--center">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
         <rect x="14" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
         <rect x="3" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
         <rect x="14" y="14" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
       </svg>
     </span>
-    <span class="bottom-nav__label">Categories</span>
+    <span class="bottom-nav__label">{{ tab3_label }}</span>
   </a>
 
-  <a href="{{ offers_url }}"
-     class="bottom-nav__item{% if current_path contains 'sale' or current_path contains 'offer' %} bottom-nav__item--active{% endif %}"
-     aria-label="Offers">
+  {%- comment %} Tab 4 — Offers {%- endcomment %}
+  <a href="{{ tab4_url }}"
+     class="bottom-nav__item{% if current_path == tab4_url or current_path contains 'sale' or current_path contains 'offer' %} bottom-nav__item--active{% endif %}"
+     aria-label="{{ tab4_label | escape }}">
     <span class="bottom-nav__icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path d="M9 9h.01M15 15h.01M8.5 3H5a2 2 0 00-2 2v3.5c0 .53.21 1.04.59 1.41l9.5 9.5a2 2 0 002.83 0l4.08-4.08a2 2 0 000-2.83L10.5 3.59A2 2 0 009.09 3z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         <line x1="9" y1="15" x2="15" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       </svg>
     </span>
-    <span class="bottom-nav__label">Offers</span>
+    <span class="bottom-nav__label">{{ tab4_label }}</span>
   </a>
 
-  <a href="{{ account_url }}"
+  {%- comment %} Tab 5 — Account {%- endcomment %}
+  <a href="{{ tab5_url }}"
      class="bottom-nav__item{% if current_path contains '/account' or current_path contains '/customers' %} bottom-nav__item--active{% endif %}"
-     aria-label="Account">
+     aria-label="{{ tab5_label | escape }}">
     <span class="bottom-nav__icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.8"/>
         <path d="M4 20c0-3.31 3.58-6 8-6s8 2.69 8 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
       </svg>
     </span>
-    <span class="bottom-nav__label">Account</span>
+    <span class="bottom-nav__label">{{ tab5_label }}</span>
   </a>
+
 </nav>
+{% endunless %}
