@@ -560,5 +560,32 @@
         "info": "32 x 32px .png recommended"
       }
     ]
+  },
+  {
+    "name": "Bottom Navigation",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Bottom Nav Links"
+      },
+      {
+        "type": "url",
+        "id": "bottom_nav_stores_url",
+        "label": "Stores URL",
+        "info": "Link for the Stores tab (e.g. /collections)"
+      },
+      {
+        "type": "url",
+        "id": "bottom_nav_categories_url",
+        "label": "Categories URL",
+        "info": "Link for the Categories tab (e.g. /collections/all)"
+      },
+      {
+        "type": "url",
+        "id": "bottom_nav_offers_url",
+        "label": "Offers URL",
+        "info": "Link for the Offers tab (e.g. /collections/sale)"
+      }
+    ]
   }
 ]

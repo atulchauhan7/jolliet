@@ -1685,7 +1685,7 @@ p{margin-bottom:1rem}
   .wishlist-drawer__item-image{width:52px;height:66px}
   .wishlist-drawer__footer{padding:0.4rem 1rem}
   /* Back to top */
-  .back-to-top{bottom:max(20px, calc(12px + env(safe-area-inset-bottom, 0px)));right:16px;width:44px;height:44px;border-radius:12px}
+  .back-to-top{bottom:calc(72px + env(safe-area-inset-bottom, 0px));right:14px;width:44px;height:44px;border-radius:12px}
   .back-to-top svg{width:16px;height:16px}
   /* Blog */
   .blog-card__content{padding:0.6rem}
@@ -1986,12 +1986,13 @@ p{margin-bottom:1rem}
 .template-product .back-to-top{bottom:80px}
 .template-product .whatsapp-float{bottom:136px}
 @media(max-width:768px){
-  .template-product .back-to-top{bottom:max(76px,calc(68px + env(safe-area-inset-bottom,0px)))}
-  .template-product .whatsapp-float{bottom:max(124px,calc(116px + env(safe-area-inset-bottom,0px)))}
+  /* PDP: back-to-top and whatsapp must clear bottom nav (62px) + CTA bar (~72px) */
+  .template-product .back-to-top{bottom:calc(142px + env(safe-area-inset-bottom,0px))}
+  .template-product .whatsapp-float{bottom:calc(194px + env(safe-area-inset-bottom,0px))}
 }
 @media(max-width:412px){
-  .template-product .back-to-top{bottom:max(64px,calc(56px + env(safe-area-inset-bottom,0px)))}
-  .template-product .whatsapp-float{bottom:max(112px,calc(104px + env(safe-area-inset-bottom,0px)))}
+  .template-product .back-to-top{bottom:calc(138px + env(safe-area-inset-bottom,0px))}
+  .template-product .whatsapp-float{bottom:calc(190px + env(safe-area-inset-bottom,0px))}
 }
 
 /* === PRODUCT LIGHTBOX === */
@@ -2096,12 +2097,97 @@ iframe:not([src*="gokwik"]){max-width:100%}
   .announcement-bar--belt{height:calc(26px + env(safe-area-inset-top,0px))}
   .announcement-bar--timer .announcement-bar__timer-layout{padding-top:env(safe-area-inset-top,0px)}
   .site-footer__bottom{padding-bottom:calc(4rem + env(safe-area-inset-bottom))}
-  .back-to-top{bottom:calc(24px + env(safe-area-inset-bottom))}
-  .whatsapp-float{bottom:calc(80px + env(safe-area-inset-bottom))}
+  /* Desktop-only overrides; mobile bottom-nav section handles its own safe-area positioning */
+  @media(min-width:769px){
+    .back-to-top{bottom:calc(24px + env(safe-area-inset-bottom))}
+    .whatsapp-float{bottom:calc(80px + env(safe-area-inset-bottom))}
+  }
 }
 
 /* === PERFORMANCE === */
 /* content-visibility removed — caused scroll calculation issues and delayed image paint */
+
+/* === BOTTOM NAVIGATION === */
+.bottom-nav{
+  display:none;
+  position:fixed;
+  bottom:0;left:0;right:0;
+  z-index:500;
+  background:#fff;
+  border-top:1px solid rgba(0,0,0,0.08);
+  box-shadow:0 -4px 24px rgba(0,0,0,0.07);
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px));
+  flex-direction:row;
+  align-items:stretch;
+  justify-content:space-around;
+  gap:0;
+}
+.bottom-nav__item{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  padding:4px 2px;
+  color:var(--color-text-muted);
+  text-decoration:none;
+  transition:color 0.2s ease,transform 0.15s ease;
+  min-width:0;
+  position:relative;
+}
+.bottom-nav__item:active{transform:scale(0.9)}
+.bottom-nav__item--active{color:var(--color-accent)}
+.bottom-nav__item--active .bottom-nav__icon--center{background:var(--color-accent);box-shadow:0 4px 14px rgba(var(--color-accent-rgb),0.38)}
+.bottom-nav__icon{
+  width:24px;height:24px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:color 0.2s ease;
+}
+.bottom-nav__icon svg{width:22px;height:22px}
+.bottom-nav__icon--center{
+  width:46px;height:46px;
+  background:var(--color-accent);
+  border-radius:14px;
+  box-shadow:0 4px 14px rgba(var(--color-accent-rgb),0.35);
+  margin-top:-18px;
+  color:#fff;
+  transition:background 0.2s ease,box-shadow 0.2s ease,transform 0.15s ease;
+}
+.bottom-nav__icon--center svg{width:20px;height:20px}
+.bottom-nav__item--center .bottom-nav__label{margin-top:5px}
+.bottom-nav__label{
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:0.02em;
+  line-height:1;
+  white-space:nowrap;
+  transition:color 0.2s ease;
+}
+/* Active indicator dot */
+.bottom-nav__item--active:not(.bottom-nav__item--center)::after{
+  content:'';
+  position:absolute;
+  bottom:2px;
+  left:50%;transform:translateX(-50%);
+  width:4px;height:4px;
+  border-radius:50%;
+  background:var(--color-accent);
+}
+@media(max-width:768px){
+  .bottom-nav{display:flex}
+  /* Push page content above bottom nav */
+  body{padding-bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+  /* Product page — CTA bar sits above bottom nav */
+  .product-info__cta-group{bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+  /* Size sheet sits above bottom nav */
+  .size-sheet{padding-bottom:calc(1.5rem + 62px + env(safe-area-inset-bottom,0px))}
+  /* Back to top — above bottom nav */
+  .back-to-top{bottom:calc(72px + env(safe-area-inset-bottom,0px));right:14px}
+  /* WhatsApp — above back-to-top */
+  .whatsapp-float{bottom:calc(124px + env(safe-area-inset-bottom,0px));right:14px}
+}
 
 /* === REDUCED MOTION === */
 @media(prefers-reduced-motion:reduce){
