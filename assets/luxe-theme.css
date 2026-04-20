@@ -1342,9 +1342,8 @@ p{margin-bottom:1rem}
 .pdp-recommendations .section-header--with-nav{display:flex;justify-content:center;align-items:center;margin-bottom:2rem;text-align:center}
 .pdp-recommendations .section-header__subtitle{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--color-accent);margin-bottom:0.25rem}
 .pdp-recommendations .section-header__title{font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;margin:0}
-.pdp-reco-carousel{margin:0}
-.pdp-reco-carousel .product-card{margin:0}
-.pdp-reco-carousel .carousel__viewport{overflow:hidden}
+.pdp-reco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pdp-reco-grid__item .product-card{margin:0}
 
 @media(max-width:768px){
   .pdp-reviews__header{flex-direction:column;gap:1.25rem}
@@ -1355,8 +1354,7 @@ p{margin-bottom:1rem}
   .pdp-recommendations .section-header__title{font-size:1.2rem}
   /* main-content padding-bottom handles bottom clearance — no extra space needed here */
   .pdp-recommendations{padding-bottom:1rem}
-  .pdp-reco-carousel{margin:0}
-  .pdp-reco-carousel .carousel__slide{min-width:65vw}
+  .pdp-reco-grid{grid-template-columns:repeat(2,1fr);gap:12px}
 }
 
 /* === COLLECTION PAGE — Clean, editorial grid === */

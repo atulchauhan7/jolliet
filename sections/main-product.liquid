@@ -582,19 +582,14 @@ decoding="async"
       <h2 class="section-header__title">You Might Also Like</h2>
     </div>
   </div>
-  <div class="carousel pdp-reco-carousel" data-carousel data-carousel-per-view="4" data-carousel-gap="24" data-carousel-loop="true">
-    <div class="carousel__viewport">
-      <div class="carousel__track" data-carousel-track>
-        {% for p in rec_collection.products limit: 9 %}
-        {% if p.id != product.id %}
-        <div class="carousel__slide" data-carousel-slide>
-          {% render 'product-card', product: p %}
-        </div>
-        {% endif %}
-        {% endfor %}
-      </div>
+  <div class="pdp-reco-grid">
+    {% for p in rec_collection.products limit: 8 %}
+    {% if p.id != product.id %}
+    <div class="pdp-reco-grid__item">
+      {% render 'product-card', product: p %}
     </div>
-    <div class="carousel__dots" data-carousel-dots></div>
+    {% endif %}
+    {% endfor %}
   </div>
 </div>
 </div>
