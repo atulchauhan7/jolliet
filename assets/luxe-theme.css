@@ -1353,7 +1353,8 @@ p{margin-bottom:1rem}
   .pdp-reviews__avg-number{font-size:1.6rem}
   .pdp-review__date{margin-left:0;flex-basis:100%;padding-left:calc(36px + 0.75rem)}
   .pdp-recommendations .section-header__title{font-size:1.2rem}
-  .pdp-recommendations{padding-bottom:5rem}
+  /* main-content padding-bottom handles bottom clearance — no extra space needed here */
+  .pdp-recommendations{padding-bottom:1rem}
   .pdp-reco-carousel{margin:0}
   .pdp-reco-carousel .carousel__slide{min-width:65vw}
 }
@@ -2177,8 +2178,10 @@ iframe:not([src*="gokwik"]){max-width:100%}
 }
 @media(max-width:768px){
   .bottom-nav{display:flex}
-  /* Push page content above bottom nav */
-  body{padding-bottom:calc(62px + env(safe-area-inset-bottom,0px))}
+  /* Pad only main-content — footer sits naturally, bottom nav overlays it */
+  .main-content{padding-bottom:calc(70px + env(safe-area-inset-bottom,0px))}
+  /* PDP: main-content must also clear the sticky CTA bar (~58px) above the bottom nav */
+  .template-product .main-content{padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))}
   /* Product page — CTA bar sits above bottom nav */
   .product-info__cta-group{bottom:calc(62px + env(safe-area-inset-bottom,0px))}
   /* Size sheet sits above bottom nav */
