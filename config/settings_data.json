@@ -54,6 +54,9 @@
     "product_trust_4": "COD Available",
     "product_show_share": true,
     "favicon": "shopify://shop_images/LOGO_GULAAB_GALI_PNG_2.png",
+    "bottom_nav_tab2_label": "Products",
+    "bottom_nav_tab2_url": "shopify://collections/frontpage",
+    "bottom_nav_tab5_label": "",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
