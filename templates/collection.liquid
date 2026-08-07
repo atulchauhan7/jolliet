@@ -25,7 +25,7 @@
 <p class="collection-desc">{{ collection.description }}</p>
 {% endif %}
 {% paginate collection.products by 12 %}
-<div class="grid grid--4" data-animate-stagger>
+<div class="grid grid--4 product-grid" data-animate-stagger>
 {% for product in collection.products %}
 <div data-animate="fade-up">
 {% render 'product-card', product: product %}

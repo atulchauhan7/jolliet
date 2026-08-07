@@ -13,7 +13,7 @@
 {% if search.performed %}
 {% if search.results_count > 0 %}
 <p class="text-center text-muted mb-2">{{ search.results_count }} results for "{{ search.terms | escape }}"</p>
-<div class="grid grid--4" data-animate-stagger>
+<div class="grid grid--4 product-grid" data-animate-stagger>
 {% for item in search.results %}
 {% if item.object_type == 'product' %}
 <div data-animate="fade-up">

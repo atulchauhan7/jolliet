@@ -12,7 +12,7 @@
 
 {% for block in section.blocks %}
 <div class="tabbed-collections__panel {% if forloop.first %}active{% endif %}" data-tab-panel="{{ block.id }}" role="tabpanel" id="panel-{{ block.id }}" aria-labelledby="tab-{{ block.id }}">
-<div class="grid grid--{{ section.settings.columns }}" data-stagger-reveal>
+<div class="grid grid--{{ section.settings.columns }} product-grid" data-stagger-reveal>
 {% assign tab_collection = collections[block.settings.collection] %}
 {% for product in tab_collection.products limit: section.settings.products_to_show %}
 {% render 'product-card', product: product %}

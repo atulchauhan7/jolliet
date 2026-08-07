@@ -92,15 +92,30 @@ p{margin-bottom:1rem}
 .btn--full{width:100%}
 .btn--magnetic{transition:transform 0.3s var(--ease-out-expo)}
 
-/* === PAGE LOADER — Luxury fashion brand experience === */
-.page-loader{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--color-accent);display:flex;align-items:center;justify-content:center;z-index:10000;transition:opacity 0.8s var(--ease-out-expo),visibility 0.8s}
+/* === PAGE LOADER — Editorial Indian-wear brand experience === */
+.page-loader{position:fixed;inset:0;background:#211116;display:flex;align-items:center;justify-content:center;z-index:10000;transition:opacity .9s var(--ease-out-expo),visibility .9s;overflow:hidden}
+.page-loader::before{content:'';position:absolute;width:min(72vw,680px);height:min(72vw,680px);border:1px solid rgba(226,190,145,.12);border-radius:50%;box-shadow:0 0 0 42px rgba(226,190,145,.025),0 0 0 84px rgba(226,190,145,.018)}
+.page-loader::after{content:'';position:absolute;inset:10px;border:1px solid rgba(226,190,145,.13);pointer-events:none}
 .page-loader.loaded{opacity:0;visibility:hidden;pointer-events:none}
-.loader-inner{text-align:center;display:flex;flex-direction:column;align-items:center;gap:2rem}
-.loader-text{font-size:1.1rem;text-transform:uppercase;letter-spacing:0.6em;color:rgba(255,255,255,0.9);font-family:var(--font-heading);font-weight:400;position:relative}
-.loader-tagline{font-size:0.62rem;text-transform:uppercase;letter-spacing:0.35em;color:rgba(255,255,255,0.35);font-family:var(--font-body);font-weight:400;margin-top:-0.5rem}
-.loader-bar{width:120px;height:1.5px;background:rgba(255,255,255,0.1);overflow:hidden;border-radius:2px}
-.loader-bar__fill{width:100%;height:100%;background:linear-gradient(90deg,var(--color-accent),rgba(255,255,255,0.8));animation:loaderSlide 1.2s var(--ease-out-expo) infinite}
-@keyframes loaderSlide{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.loader-inner{text-align:center;display:flex;flex-direction:column;align-items:center;gap:0;position:relative;z-index:1;animation:loaderRise .9s var(--ease-out-expo) both}
+.page-loader.loaded .loader-inner{transform:translateY(-18px) scale(.97);opacity:0;transition:transform .65s var(--ease-out-expo),opacity .45s ease}
+.loader-orbit{position:absolute;width:150px;height:150px;border:1px solid rgba(226,190,145,.17);border-radius:50%;animation:loaderOrbit 8s linear infinite}
+.loader-orbit::before{content:'';position:absolute;inset:17px;border:1px dashed rgba(226,190,145,.12);border-radius:50%}
+.loader-orbit__dot{position:absolute;top:-3px;left:50%;width:5px;height:5px;background:#e2be91;border-radius:50%;box-shadow:0 0 14px rgba(226,190,145,.8)}
+.loader-monogram{width:68px;height:68px;border:1px solid rgba(226,190,145,.72);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#e2be91;font:400 2.1rem/1 var(--font-heading);letter-spacing:.04em;background:#211116;box-shadow:0 0 0 8px #211116,0 0 0 9px rgba(226,190,145,.12);margin-bottom:2rem}
+.loader-eyebrow{font-size:.54rem;text-transform:uppercase;letter-spacing:.28em;color:rgba(255,255,255,.52);margin-bottom:.9rem;max-width:290px}
+.loader-text{font-size:clamp(1.25rem,4vw,1.75rem);text-transform:uppercase;letter-spacing:.42em;text-indent:.42em;color:#fff;font-family:var(--font-heading);font-weight:400;line-height:1}
+.loader-tagline{font-size:.58rem;text-transform:uppercase;letter-spacing:.28em;color:#e2be91;font-family:var(--font-body);font-weight:500;margin-top:1rem}
+.loader-bar{width:150px;height:2px;background:rgba(255,255,255,.13);overflow:hidden;border-radius:2px;margin-top:2.2rem}
+.loader-bar__fill{width:42%;height:100%;background:#e2be91;box-shadow:0 0 12px rgba(226,190,145,.6);animation:loaderSlide 1.35s var(--ease-out-expo) infinite}
+.loader-status{font-size:.5rem;text-transform:uppercase;letter-spacing:.18em;color:rgba(255,255,255,.34);margin-top:.85rem}
+.loader-status__dots{color:#e2be91;letter-spacing:.12em;animation:loaderDots 1.2s ease-in-out infinite}
+@keyframes loaderRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes loaderOrbit{to{transform:rotate(360deg)}}
+@keyframes loaderSlide{0%{transform:translateX(-180%)}100%{transform:translateX(430%)}}
+@keyframes loaderDots{0%,100%{opacity:.25}50%{opacity:1}}
+@media(max-width:480px){.loader-eyebrow{letter-spacing:.2em}.loader-text{letter-spacing:.3em;text-indent:.3em}.loader-orbit{width:132px;height:132px}}
+@media(prefers-reduced-motion:reduce){.loader-inner,.loader-orbit,.loader-bar__fill,.loader-status__dots{animation:none}.page-loader,.page-loader.loaded .loader-inner{transition:none}}
 
 /* === HEADER INLINE SEARCH BAR === */
 .header-search{position:absolute;top:100%;left:0;right:0;background:var(--color-header-bg);overflow:hidden;max-height:0;opacity:0;visibility:hidden;transition:max-height 0.45s var(--ease-out-expo),opacity 0.3s ease,visibility 0s 0.45s;z-index:1001;box-shadow:0 8px 30px rgba(0,0,0,0.08);border-bottom:2px solid var(--color-accent)}
@@ -127,42 +142,42 @@ p{margin-bottom:1rem}
 .announcement-bar__link{display:block;color:inherit;text-decoration:none}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* No-timer fallback: compact belt with rotating text */
-.announcement-bar--belt{height:26px;display:flex;align-items:center;padding:0;font-size:0.5rem;letter-spacing:0.15em}
-.announcement-bar--belt .announcement-bar__link{display:block;width:100%;height:100%;overflow:hidden}
-.announcement-bar--belt .announcement-bar__marquee{height:100%;align-items:center;animation-duration:20s}
-.announcement-bar--belt .announcement-bar__marquee span{padding:0 clamp(1.2rem,3.2vw,3rem)}
-.announcement-bar--belt .announcement-bar__marquee span::before{font-size:0.55em;opacity:0.45}
+/* No-timer fallback: refined marquee */
+.announcement-bar--belt{height:26px;display:flex;align-items:center;padding:0;font-size:.6rem;letter-spacing:.12em;background:var(--color-accent);border-bottom:0;box-shadow:0 2px 8px rgba(var(--color-accent-rgb),.18)}
+.announcement-bar--belt .announcement-bar__link{display:block;width:100%;height:100%;overflow:hidden;color:#fff}
+.announcement-bar--belt .announcement-bar__marquee{height:100%;align-items:center;animation-duration:30s}
+.announcement-bar--belt .announcement-bar__marquee span{padding:0 clamp(2rem,5vw,5rem);display:inline-flex;align-items:center;font-weight:700;color:#fff}
+.announcement-bar--belt .announcement-bar__marquee span::before,.announcement-bar--belt .announcement-bar__marquee span::after{display:none}
 
 /* === TIMER BAR === */
-.announcement-bar--timer{padding:0;height:48px;display:flex;align-items:stretch;overflow:hidden;background:linear-gradient(90deg,var(--color-accent-dark) 0%,var(--color-accent) 100%);box-shadow:0 2px 12px rgba(var(--color-accent-rgb),0.35);position:fixed;top:0;left:0;right:0;text-transform:none;letter-spacing:0;font-size:1rem}
-.announcement-bar--timer::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(255,255,255,0.06) 0%,transparent 100%);pointer-events:none;z-index:0}
+.announcement-bar--timer{padding:0;height:54px;display:flex;align-items:stretch;overflow:hidden;background:linear-gradient(100deg,var(--color-accent-dark),var(--color-accent));box-shadow:0 3px 16px rgba(var(--color-accent-rgb),.24);position:fixed;top:0;left:0;right:0;text-transform:none;letter-spacing:0;font-size:1rem;border-bottom:0}
+.announcement-bar--timer::after{content:'';position:absolute;left:clamp(18px,6vw,90px);right:clamp(18px,6vw,90px);bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--color-accent),transparent);opacity:.6;pointer-events:none;z-index:0}
 @keyframes ann-shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(200%)}}
 .announcement-bar__timer-layout{display:flex;align-items:center;width:100%;padding:0;position:relative;z-index:1}
 /* Left: promo text */
-.announcement-bar__timer-msg{display:flex;align-items:center;justify-content:center;flex:1;min-width:0;font-size:clamp(15px,1.8vw,17px);font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:none;letter-spacing:0.04em;line-height:1;padding:0 10px 0 18px}
+.announcement-bar__timer-msg{display:flex;align-items:center;justify-content:center;flex:1;min-width:0;font-size:clamp(15px,1.6vw,17px);font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:none;letter-spacing:.03em;line-height:1.2;padding:0 18px}
 .announcement-bar__timer-msg .announcement-bar__link{display:inline;color:inherit;text-decoration:none;font-weight:inherit}
 /* Vertical divider */
 .ann-vdivider{width:1px;height:55%;background:rgba(255,255,255,0.3);flex-shrink:0;align-self:center}
 /* Right: countdown */
-.announcement-bar__countdown{display:flex;align-items:center;gap:5px;flex-shrink:0;padding:6px 16px 6px 12px}
-.ann-ends-label{font-size:0.55rem;font-weight:600;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.6);flex-shrink:0;margin-right:4px;white-space:nowrap;line-height:1}
+.announcement-bar__countdown{display:flex;align-items:center;gap:7px;flex-shrink:0;padding:7px 22px 7px 16px}
+.ann-ends-label{font-size:.64rem;font-weight:600;text-transform:uppercase;letter-spacing:.16em;color:rgba(255,255,255,.72);flex-shrink:0;margin-right:5px;white-space:nowrap;line-height:1}
 /* Timer boxes — match theme card style */
-.ann-timer-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.25);border-radius:5px;min-width:44px;height:34px;gap:1px}
+.ann-timer-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.32);border-radius:3px;min-width:48px;height:40px;gap:2px}
 .ann-timer-num{font-size:1.1rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;color:#fff;text-align:center;letter-spacing:0}
-.ann-timer-label{font-size:0.5rem;font-weight:600;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.75);line-height:1;margin-top:1px}
+.ann-timer-label{font-size:.56rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.78);line-height:1;margin-top:1px}
 @media(max-width:768px){
   .announcement-bar__timer-msg{font-size:clamp(14px,2.4vw,16px);letter-spacing:0.02em;padding:0 8px 0 12px}
   .ann-ends-label{display:none}
 }
 @media(max-width:480px){
-  .announcement-bar--timer{height:48px}
-  .announcement-bar--belt{height:24px;font-size:0.46rem;letter-spacing:0.12em}
-  .announcement-bar__timer-msg{font-size:15px;letter-spacing:0.02em;padding:0 6px 1px 10px}
+  .announcement-bar--timer{height:54px}
+  .announcement-bar--belt{height:26px;font-size:.56rem;letter-spacing:.1em}
+  .announcement-bar__timer-msg{font-size:15px;letter-spacing:.01em;padding:0 6px 1px 10px}
   .announcement-bar__countdown{padding:5px 10px 5px 8px;gap:3px}
-  .ann-timer-seg{min-width:38px;height:32px}
-  .ann-timer-num{font-size:0.9rem}
-  .ann-timer-label{font-size:0.42rem}
+  .ann-timer-seg{min-width:38px;height:34px}
+  .ann-timer-num{font-size:1rem}
+  .ann-timer-label{font-size:.44rem}
 }
 
 /* === HEADER — Premium editorial fashion header === */
@@ -1821,6 +1836,9 @@ p{margin-bottom:1rem}
 /* === VERY SMALL SCREENS (360px and below) === */
 @media(max-width:360px){
   .grid--2,.grid--3,.grid--4{grid-template-columns:1fr}
+  /* Product browsing stays two-up even on the smallest phones. */
+  .product-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px}
+  .product-grid>div{min-width:0}
   /* Collection card full width on very small screens */
   .collection-card{aspect-ratio:3/4}
   .collection-card__title{font-size:0.85rem}
@@ -2092,7 +2110,7 @@ iframe:not([src*="gokwik"]){max-width:100%}
 /* === SAFE AREA INSETS FOR NOTCHED PHONES === */
 @supports(padding:env(safe-area-inset-top)){
   .announcement-bar:not(.announcement-bar--timer):not(.announcement-bar--belt){padding-top:calc(5px + env(safe-area-inset-top,0px))}
-  .announcement-bar--timer{height:calc(48px + env(safe-area-inset-top,0px))}
+  .announcement-bar--timer{height:calc(54px + env(safe-area-inset-top,0px))}
   .announcement-bar--belt{height:calc(26px + env(safe-area-inset-top,0px))}
   .announcement-bar--timer .announcement-bar__timer-layout{padding-top:env(safe-area-inset-top,0px)}
   .site-footer__bottom{padding-bottom:calc(4rem + env(safe-area-inset-bottom))}
