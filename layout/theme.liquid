@@ -255,5 +255,7 @@ setTimeout(function(){
 {% if request.design_mode %}
 <script src="{{ 'theme-editor.js' | asset_url }}" defer></script>
 {% endif %}
+
+{% render 'razorpay-magic-checkout' %}
 </body>
 </html>
