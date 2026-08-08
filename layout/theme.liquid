@@ -14,7 +14,7 @@
 {% if settings.razorpay_enabled and settings.razorpay_key_id != blank %}
 <!-- Razorpay Magic Checkout: key meta + window var read by Razorpay's injected app script -->
 <meta name="razorpay-key" content="{{ settings.razorpay_key_id }}">
-<script>window.rzp_key='{{ settings.razorpay_key_id }}';window.razorpayEnabled=true;</script>
+<script>window.rzp_key={{ settings.razorpay_key_id | json }};window.razorpayEnabled=true;</script>
 {% else %}
 <script>window.razorpayEnabled={{ settings.razorpay_enabled | json }};</script>
 {% endif %}

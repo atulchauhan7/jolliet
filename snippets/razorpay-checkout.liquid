@@ -1,8 +1,8 @@
 {% comment %}
   Razorpay Magic Checkout button snippet.
-  Razorpay's injected app script intercepts CLICK events on a button that
-  navigates to /checkout via window.location — NOT a form POST.
-  We guard with request.design_mode to prevent theme editor redirect errors.
+  Razorpay's Shopify app hooks the standard Shopify checkout button/form.
+  Keep this as a native checkout form so Magic Checkout can intercept it,
+  while Shopify still provides a safe fallback if the app is unavailable.
 {% endcomment %}
 {% if settings.razorpay_enabled %}
   {% if request.design_mode %}
@@ -12,16 +12,10 @@
       </button>
     </div>
   {% else %}
-    <div class="razorpay-checkout-wrap">
-      <button
-        type="button"
-        name="checkout"
-        id="razorpay-magic-btn"
-        class="btn btn--primary btn--full"
-        onclick="window.location.href='/checkout'"
-      >
+    <form action="{{ routes.cart_url }}" method="post" class="razorpay-checkout-wrap">
+      <button type="submit" name="checkout" id="razorpay-magic-btn" class="btn btn--primary btn--full">
         <span class="btn-text"><span>{{ settings.razorpay_button_text | default: 'Checkout' }}</span></span>
       </button>
-    </div>
+    </form>
   {% endif %}
 {% endif %}
