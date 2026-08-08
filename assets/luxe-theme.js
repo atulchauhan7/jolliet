@@ -194,8 +194,10 @@ return '/checkout';
 }
 
 /* ── Razorpay Magic Checkout ──
-   Use the standard Shopify checkout form so Razorpay's Shopify app can
-   intercept the checkout event. Native Shopify checkout remains the fallback.
+   Razorpay's Shopify app injects its own JS via ScriptTag and intercepts
+   the standard /checkout navigation automatically — no custom JS API needed.
+   We just navigate to /checkout and Razorpay takes over.
+   razorpayEnabled is set to true via theme settings when the app is active.
 */
 function shouldUseRazorpayCheckout(){
 return !!(window.razorpayEnabled);
@@ -203,7 +205,7 @@ return !!(window.razorpayEnabled);
 
 /* Exposed for direct button use — navigates to /checkout for Razorpay to intercept */
 window.onRazorpayCheckoutClick=function(btn){
-if(btn&&btn.form){btn.click();return;}
+if(btn){btn.disabled=true;}
 window.location.href=resolveCheckoutUrl();
 };
 
@@ -227,11 +229,9 @@ return false;
 }
 
 function triggerShopflowCheckout(source,trigger){
-/* Priority: Razorpay standard checkout form → GoKwik → native */
+/* Priority: Razorpay (intercepts window.location to /checkout) → GoKwik → native */
 if(shouldUseRazorpayCheckout()){
-var rzBtn=(trigger&&trigger.closest?trigger.closest('#razorpay-magic-btn'):null)||document.getElementById('razorpay-magic-btn');
-if(rzBtn&&rzBtn.form){rzBtn.click();return;}
-window.location.href=resolveCheckoutUrl();
+window.location.href='/checkout';
 return;
 }
 triggerGoKwikOrNative(trigger);
@@ -409,7 +409,7 @@ h+='<div class="cart-drawer__footer"><div class="cart-drawer__subtotal"><span>Su
 h+='<span class="cart-drawer__subtotal-price">'+money(cart.total_price)+'</span></div>';
 /* Razorpay Magic Checkout button (shown when enabled) */
 if(window.razorpayEnabled){
-h+='<form action="'+escAttr(window.theme.routes.cart_url)+'" method="post" class="razorpay-checkout-wrap"><button type="submit" name="checkout" id="razorpay-magic-btn" class="btn btn--primary btn--full"><span class="btn-text"><span>Checkout</span></span></button></form>';
+h+='<div class="razorpay-checkout-wrap"><button type="button" name="checkout" id="razorpay-magic-btn" class="btn btn--primary btn--full" onclick="window.location.href=\'/checkout\'"><span class="btn-text"><span>Checkout</span></span></button></div>';
 }else{
 h+='<div class="gokwik-checkout"><button type="button" class="btn btn--primary btn--full disabled" disabled onclick="onCheckoutClick(this)"><span class="btn-text"><span>Checkout</span></span></button></div>';
 }
