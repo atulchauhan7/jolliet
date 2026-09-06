@@ -198,6 +198,14 @@ decoding="async"
   {% form 'product', product, data-add-to-cart: true, data-product-form: true %}
   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
 
+  <div class="product-size-guide">
+    <span class="product-size-guide__label">Need help with your fit?</span>
+    <a href="#size-chart-modal" class="size-chart-trigger" aria-label="View size chart" onclick="document.getElementById('size-chart-modal').classList.add('open');event.stopPropagation();return false;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18"/><path d="M7 3v4"/><path d="M17 3v4"/><path d="M7 21v-4"/><path d="M17 21v-4"/><rect x="3" y="7" width="18" height="10" rx="2"/></svg>
+      Size Chart
+    </a>
+  </div>
+
   {% unless product.has_only_default_variant %}
   <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
 
@@ -212,12 +220,6 @@ decoding="async"
     <div class="product-option" data-option-index="{{ forloop.index0 }}" data-option-name="{{ option.name | escape }}">
       <label class="product-option__label">
         {{ option.name }}
-        {% if is_size %}
-        <a href="#" class="kiwi-sizing-chart-trigger size-chart-trigger" data-kiwisizing data-product-handle="{{ product.handle }}" aria-label="View size chart" onclick="document.getElementById('size-chart-modal').classList.add('open');event.stopPropagation();return false;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18"/><path d="M7 3v4"/><path d="M17 3v4"/><path d="M7 21v-4"/><path d="M17 21v-4"/><rect x="3" y="7" width="18" height="10" rx="2"/></svg>
-          Size Chart
-        </a>
-        {% endif %}
       </label>
       <div class="product-option__values">
         {% for value in option.values %}
@@ -634,7 +636,7 @@ decoding="async"
           <thead>
             <tr>
               {% if sc != blank %}{% for col in sc.headers %}<th scope="col">{{ col }}</th>{% endfor %}
-              {% else %}<th scope="col">Size</th><th scope="col">Bust</th><th scope="col">Waist</th><th scope="col">Hip</th><th scope="col">Length</th>
+              {% else %}<th scope="col">Size</th><th scope="col">Bust (in)</th>
               {% endif %}
             </tr>
           </thead>
@@ -644,14 +646,14 @@ decoding="async"
             <tr data-size="{{ row[0] }}">{% for cell in row %}<td>{{ cell }}</td>{% endfor %}</tr>
             {% endfor %}
             {% else %}
-            <tr data-size="XS"><td>XS</td><td>34</td><td>30</td><td>36-38</td><td>42</td></tr>
-            <tr data-size="S"><td>S</td><td>36</td><td>32</td><td>38-40</td><td>43</td></tr>
-            <tr data-size="M"><td>M</td><td>38</td><td>34</td><td>40-42</td><td>44</td></tr>
-            <tr data-size="L"><td>L</td><td>40</td><td>36</td><td>42-44</td><td>45</td></tr>
-            <tr data-size="XL"><td>XL</td><td>42</td><td>38</td><td>44-46</td><td>46</td></tr>
-            <tr data-size="2XL"><td>2XL</td><td>44</td><td>40</td><td>46-48</td><td>47</td></tr>
-            <tr data-size="3XL"><td>3XL</td><td>46</td><td>42</td><td>48-50</td><td>48</td></tr>
-            <tr data-size="4XL"><td>4XL</td><td>48</td><td>44</td><td>50-52</td><td>49</td></tr>
+            <tr data-size="S"><td>S</td><td>36</td></tr>
+            <tr data-size="M"><td>M</td><td>38</td></tr>
+            <tr data-size="L"><td>L</td><td>40</td></tr>
+            <tr data-size="XL"><td>XL</td><td>42</td></tr>
+            <tr data-size="2XL"><td>2XL</td><td>44</td></tr>
+            <tr data-size="3XL"><td>3XL</td><td>46</td></tr>
+            <tr data-size="4XL"><td>4XL</td><td>48</td></tr>
+            <tr data-size="5XL"><td>5XL</td><td>50</td></tr>
             {% endif %}
           </tbody>
         </table>

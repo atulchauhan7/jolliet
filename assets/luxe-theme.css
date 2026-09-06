@@ -1084,7 +1084,9 @@ p{margin-bottom:1rem}
 .product-trust{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;padding:1.25rem 0;margin-bottom:0;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border)}
 
 /* Size chart trigger */
-.size-chart-trigger{display:inline-flex;align-items:center;gap:5px;font-size:0.68rem;font-weight:600;letter-spacing:0.04em;color:var(--color-accent);cursor:pointer;background:rgba(var(--color-accent-rgb),0.06);border:1px solid rgba(var(--color-accent-rgb),0.15);font-family:inherit;padding:3px 10px;margin-left:0.6rem;text-transform:none;transition:all 0.25s ease;border-radius:50px}
+.product-size-guide{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:1.1rem 0 1.35rem;padding:12px 14px;border:1px solid var(--color-border);background:rgba(var(--color-accent-rgb),0.025);border-radius:8px}
+.product-size-guide__label{font-size:.72rem;color:var(--color-text-muted);line-height:1.4}
+.size-chart-trigger{display:inline-flex;align-items:center;gap:5px;font-size:0.68rem;font-weight:600;letter-spacing:0.04em;color:var(--color-accent);cursor:pointer;background:rgba(var(--color-accent-rgb),0.06);border:1px solid rgba(var(--color-accent-rgb),0.15);font-family:inherit;padding:5px 11px;text-transform:none;transition:all 0.25s ease;border-radius:50px;white-space:nowrap}
 .size-chart-trigger:hover{background:rgba(var(--color-accent-rgb),0.12);border-color:rgba(var(--color-accent-rgb),0.3);transform:translateY(-1px)}
 .size-chart-trigger svg{flex-shrink:0;width:12px;height:12px}
 
@@ -1153,6 +1155,8 @@ p{margin-bottom:1rem}
   .size-chart-table td:first-child,.size-chart-table th:first-child{padding-left:14px}
 }
 @media(max-width:480px){
+  .product-size-guide{align-items:flex-start;flex-direction:column;gap:8px;margin:1rem 0 1.15rem;padding:11px 12px}
+  .product-size-guide .size-chart-trigger{width:100%;justify-content:center}
   .size-chart-modal{height:85vh;border-radius:20px 20px 0 0}
   .size-chart-modal__header{padding:1rem 1rem 0.6rem}
   .size-chart-modal__title{font-size:0.88rem}
